@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Coarse Pointing Estimate Icon</title>
+  <desc id="desc">White line-art technical diagram of a spacecraft above Earth with roll and nod offset angles referenced to the spacecraft axis.</desc>
+
+  <defs>
+    <style>
+      .bg { fill: #04264B; }
+      .frame { fill: none; stroke: #E8EDF2; stroke-width: 5; opacity: 0.86; }
+      .line { fill: none; stroke: #F4F7FB; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+      .thin { fill: none; stroke: #F4F7FB; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .dash { fill: none; stroke: #F4F7FB; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 18 18; }
+      .text { fill: #F4F7FB; font-family: Inter, Arial, Helvetica, sans-serif; font-weight: 500; font-size: 58px; }
+      .smalltext { fill: #F4F7FB; font-family: Inter, Arial, Helvetica, sans-serif; font-weight: 500; font-size: 52px; }
+      .target { fill: none; stroke: #F4F7FB; stroke-width: 7; }
+    </style>
+  </defs>
+
+  <!-- Background and frame -->
+  <rect class="bg" x="0" y="0" width="1024" height="1024" rx="44"/>
+  <rect class="frame" x="26" y="26" width="972" height="972" rx="52"/>
+
+  <!-- Earth horizon -->
+  <path class="line" d="M95 910 C205 720, 376 620, 548 626 C717 632, 860 738, 937 910"/>
+
+  <!-- Simplified continent outlines, intentionally abstract for small-size readability -->
+  <path class="thin" d="M264 707 C302 690, 342 692, 374 714 C352 726, 336 753, 311 765 C283 779, 251 766, 235 743 C226 729, 238 716, 264 707 Z"/>
+  <path class="thin" d="M382 680 C420 658, 464 668, 486 700 C458 706, 430 718, 407 743 C390 724, 376 703, 382 680 Z"/>
+  <path class="thin" d="M532 684 C580 664, 625 688, 640 735 C615 750, 592 774, 579 813 C547 781, 529 739, 532 684 Z"/>
+  <path class="thin" d="M659 700 C705 686, 758 700, 801 733 C774 754, 734 766, 702 755 C678 747, 656 727, 659 700 Z"/>
+  <path class="thin" d="M460 793 C500 806, 533 840, 553 886"/>
+  <path class="thin" d="M616 820 C653 836, 681 860, 698 899"/>
+  <path class="thin" d="M194 821 C231 824, 269 844, 296 882"/>
+
+  <!-- Ground target -->
+  <circle class="target" cx="618" cy="846" r="31"/>
+  <circle fill="#F4F7FB" cx="618" cy="846" r="12"/>
+
+  <!-- Geometry origin / mirror point -->
+  <circle fill="#F4F7FB" cx="492" cy="378" r="9"/>
+
+  <!-- Spacecraft axis, colinear with body axis and extended through mirror origin -->
+  <line class="dash" x1="563" y1="70" x2="421" y2="600"/>
+
+  <!-- Actual line of sight to target -->
+  <line class="line" x1="492" y1="378" x2="618" y2="846"/>
+  <path class="line" d="M618 846 L596 809"/>
+  <path class="line" d="M618 846 L638 810"/>
+
+  <!-- Spacecraft body group rotated clockwise relative to vertical -->
+  <g transform="translate(506 300) rotate(15)">
+    <!-- cylindrical body -->
+    <path class="line" d="M-55 -98
+                          C-24 -122, 24 -122, 55 -98
+                          L55 98
+                          C24 122, -24 122, -55 98
+                          Z"/>
+    <path class="line" d="M-55 -98 C-24 -74, 24 -74, 55 -98"/>
+    <path class="line" d="M-55 98 C-24 74, 24 74, 55 98"/>
+
+    <!-- solar panel struts -->
+    <line class="line" x1="-55" y1="-24" x2="-95" y2="-24"/>
+    <line class="line" x1="55" y1="-24" x2="95" y2="-24"/>
+
+    <!-- left solar panel -->
+    <rect class="line" x="-295" y="-83" width="200" height="118" rx="8"/>
+    <line class="thin" x1="-255" y1="-83" x2="-255" y2="35"/>
+    <line class="thin" x1="-215" y1="-83" x2="-215" y2="35"/>
+    <line class="thin" x1="-175" y1="-83" x2="-175" y2="35"/>
+    <line class="thin" x1="-135" y1="-83" x2="-135" y2="35"/>
+    <line class="thin" x1="-295" y1="-44" x2="-95" y2="-44"/>
+    <line class="thin" x1="-295" y1="-5" x2="-95" y2="-5"/>
+
+    <!-- right solar panel -->
+    <rect class="line" x="95" y="-83" width="200" height="118" rx="8"/>
+    <line class="thin" x1="135" y1="-83" x2="135" y2="35"/>
+    <line class="thin" x1="175" y1="-83" x2="175" y2="35"/>
+    <line class="thin" x1="215" y1="-83" x2="215" y2="35"/>
+    <line class="thin" x1="255" y1="-83" x2="255" y2="35"/>
+    <line class="thin" x1="95" y1="-44" x2="295" y2="-44"/>
+    <line class="thin" x1="95" y1="-5" x2="295" y2="-5"/>
+  </g>
+
+  <!-- Roll rotation around spacecraft/body axis -->
+  <path class="thin" d="M460 112 C514 78, 589 92, 624 142"/>
+  <path class="thin" d="M624 142 L601 136"/>
+  <path class="thin" d="M624 142 L615 119"/>
+  <text class="text" x="630" y="156">Δθ<tspan baseline-shift="-20" font-size="34">roll</tspan></text>
+
+  <!-- Nod offset angle between spacecraft reference axis and line of sight -->
+  <path class="thin" d="M441 494 C468 505, 500 500, 526 478"/>
+  <path class="thin" d="M441 494 L466 475"/>
+  <path class="thin" d="M441 494 L469 509"/>
+  <text class="text" x="542" y="520">Δθ<tspan baseline-shift="-20" font-size="34">nod</tspan></text>
+</svg>

@@ -22,6 +22,7 @@ theme:
 
 extra_css:
   - assets/stylesheets/posechain.css
+  - assets/stylesheets/extra.css
 
 markdown_extensions:
   - admonition
@@ -41,9 +42,9 @@ nav:
   - Resume: resume.md
   - Contact: contact.md
   - Engineering Case Studies:
-      - Optical Tracking & FSM Control:
-          - Overview: work/optical-tracking-fsm.md
+      - Dual-Mirror Optical Tracking:
+          - Summary: work/dual-mirror-optical-tracking.md
       - Distributed Robotics:
-          - Overview: work/distributed-robotics.md
+          - Summary: work/distributed-robotics.md
       - Space Systems & Integration:
-          - Overview: work/space-systems-payload-integration.md
+          - Summary: work/space-systems-payload-integration.md

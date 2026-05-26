@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Estimated Ground Track Icon</title>
+  <desc id="desc">White line-art icon showing an optical spacecraft tracking a ground target on Earth.</desc>
+
+  <defs>
+    <style>
+      .bg { fill: #04264B; }
+      .frame { fill: none; stroke: #E8EDF2; stroke-width: 5; opacity: 0.86; }
+      .line { fill: none; stroke: #F4F7FB; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+      .thin { fill: none; stroke: #F4F7FB; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .dash { fill: none; stroke: #F4F7FB; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 18 18; }
+      .target { fill: none; stroke: #F4F7FB; stroke-width: 7; }
+    </style>
+  </defs>
+
+  <!-- Background and frame -->
+  <rect class="bg" x="0" y="0" width="1024" height="1024" rx="44"/>
+  <rect class="frame" x="26" y="26" width="972" height="972" rx="52"/>
+
+  <!-- Spacecraft -->
+  <g transform="translate(445 255) rotate(-22)">
+    <!-- optical cylinder body -->
+    <path class="line" d="M-55 -90
+                          C-24 -114, 24 -114, 55 -90
+                          L55 90
+                          C24 114, -24 114, -55 90
+                          Z"/>
+    <path class="line" d="M-55 -90 C-24 -66, 24 -66, 55 -90"/>
+    <path class="line" d="M-55 90 C-24 66, 24 66, 55 90"/>
+    <ellipse class="line" cx="0" cy="93" rx="41" ry="16"/>
+
+    <!-- solar panel struts -->
+    <line class="line" x1="-55" y1="-20" x2="-100" y2="-20"/>
+    <line class="line" x1="55" y1="-20" x2="100" y2="-20"/>
+
+    <!-- left solar panel -->
+    <rect class="line" x="-300" y="-82" width="200" height="118" rx="8"/>
+    <line class="thin" x1="-260" y1="-82" x2="-260" y2="36"/>
+    <line class="thin" x1="-220" y1="-82" x2="-220" y2="36"/>
+    <line class="thin" x1="-180" y1="-82" x2="-180" y2="36"/>
+    <line class="thin" x1="-140" y1="-82" x2="-140" y2="36"/>
+    <line class="thin" x1="-300" y1="-43" x2="-100" y2="-43"/>
+    <line class="thin" x1="-300" y1="-4" x2="-100" y2="-4"/>
+
+    <!-- right solar panel -->
+    <rect class="line" x="100" y="-82" width="200" height="118" rx="8"/>
+    <line class="thin" x1="140" y1="-82" x2="140" y2="36"/>
+    <line class="thin" x1="180" y1="-82" x2="180" y2="36"/>
+    <line class="thin" x1="220" y1="-82" x2="220" y2="36"/>
+    <line class="thin" x1="260" y1="-82" x2="260" y2="36"/>
+    <line class="thin" x1="100" y1="-43" x2="300" y2="-43"/>
+    <line class="thin" x1="100" y1="-4" x2="300" y2="-4"/>
+  </g>
+
+  <!-- Line of sight / estimated ground track -->
+  <line class="dash" x1="480" y1="365" x2="622" y2="790"/>
+
+  <!-- Earth horizon -->
+  <path class="line" d="M95 850 C210 665, 381 575, 552 585 C719 594, 858 690, 937 850"/>
+
+  <!-- Simplified continent outlines -->
+  <path class="thin" d="M252 665 C295 642, 348 650, 381 685 C350 700, 333 730, 301 743 C266 758, 232 737, 221 705 C217 688, 230 676, 252 665 Z"/>
+  <path class="thin" d="M389 641 C435 621, 477 633, 505 669 C474 676, 442 693, 417 725 C392 701, 381 671, 389 641 Z"/>
+  <path class="thin" d="M536 664 C586 638, 638 667, 655 720 C624 737, 602 768, 590 812 C556 779, 533 723, 536 664 Z"/>
+  <path class="thin" d="M681 679 C735 659, 790 685, 824 722 C791 749, 739 759, 702 738 C685 727, 675 704, 681 679 Z"/>
+  <path class="thin" d="M454 760 C500 782, 535 822, 554 875"/>
+  <path class="thin" d="M622 802 C665 824, 694 856, 711 908"/>
+  <path class="thin" d="M184 781 C232 785, 276 819, 306 875"/>
+
+  <!-- Ground target -->
+  <circle class="target" cx="622" cy="790" r="35"/>
+  <circle fill="#F4F7FB" cx="622" cy="790" r="13"/>
+</svg>

@@ -31,8 +31,7 @@ Precision optical tracking under latency, disturbance, and real-time control con
 
 **Themes:** Controls • Prediction • Optical Tracking • Disturbance Suppression • Real-Time Systems
 
-[Explore the case study](work/optical-tracking-fsm.md)
-
+[Explore the case study](work/dual-mirror-optical-tracking.md)
 ---
 
 ### Distributed Robotics & Multi-Node Architecture

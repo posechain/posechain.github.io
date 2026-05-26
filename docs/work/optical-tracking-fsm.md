@@ -1,1 +1,0 @@
-# Optical Tracking & Fast Steering Mirror Control

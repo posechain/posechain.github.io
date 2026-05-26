@@ -154,7 +154,7 @@
 }
 
 .md-content {
-  max-width: 900px;
+  max-width: 1100px;
 }
 
 .md-typeset {
@@ -162,14 +162,17 @@
 }
 
 .md-typeset h1 {
-  font-size: 2.25rem;
-  font-weight: 700;
+  font-size: 1.9rem;
+  font-weight: 650;
+  color: #e8edf2;
 }
 
 .md-typeset h2 {
+  color: #e8edf2;
   border-bottom: 1px solid #273441;
   padding-bottom: 0.25rem;
 }
+
 
 .md-sidebar--secondary {
   width: 250px;
@@ -181,4 +184,11 @@
 .md-nav--secondary .md-nav__title {
   background: transparent !important;
   color: #8ba7bf !important;
+}
+
+/* v0.2 experiment: hide right-side page table of contents */
+.md-sidebar--secondary,
+.md-sidebar[data-md-type="toc"],
+.md-nav--secondary {
+  display: none !important;
 }
