@@ -1,0 +1,242 @@
+:root {
+  --md-primary-fg-color: #2f80b9;
+  --md-accent-fg-color: #67c7ff;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: #071018;
+  --md-default-fg-color: #e8edf2;
+  --md-typeset-a-color: #67c7ff;
+}
+
+.md-header {
+  height: 0;
+  min-height: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.md-header__inner {
+  height: 0;
+  min-height: 0;
+}
+
+.md-header__button.md-logo,
+.md-header__title,
+.md-header__option,
+.md-header__source {
+  display: none;
+}
+
+.md-container {
+  padding-top: 0;
+}
+
+.md-main {
+  margin-top: 0;
+}
+
+.md-main__inner {
+  margin-top: 0;
+}
+
+/* Remove small logo from top bar */
+.md-header__button.md-logo {
+  display: none;
+}
+
+/* Remove excess top spacing under header */
+.md-main {
+  margin-top: 0;
+}
+
+.md-main__inner {
+  margin-top: 0.25rem;
+}
+
+.md-header__title {
+  display: none;
+}
+
+.md-sidebar--primary {
+  width: 340px;
+}
+
+.md-sidebar__scrollwrap {
+  background: #252525;
+}
+
+/* Top sidebar logo panel */
+.md-sidebar--primary > .md-sidebar__scrollwrap >
+.md-sidebar__inner >
+.md-nav--primary >
+.md-nav__title {
+  min-height: 260px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background: #04264B;
+  font-size: 0;
+  margin: 0;
+  padding: 0;
+  border-bottom: none;
+}
+
+.md-sidebar--primary > .md-sidebar__scrollwrap >
+.md-sidebar__inner >
+.md-nav--primary >
+.md-nav__title::after {
+  content: "";
+  display: block;
+  width: 250px;
+  height: 170px;
+  background-image: url("../images/posechain-logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: translateY(-28px);
+}
+
+/* Visually move header search into sidebar area */
+.md-search {
+  position: fixed;
+  top: 340px;
+  left: 20px;
+  width: 304px;
+  padding: 0;
+  background: transparent;
+  z-index: 20;
+}
+
+.md-search__inner {
+  width: 100%;
+}
+
+.md-search__form {
+  width: 100%;
+}
+
+.md-search__form {
+  background: #101820;
+  border-radius: 999px;
+}
+
+/* Push nav below the visually relocated search */
+.md-sidebar__inner {
+  padding-top: 0px;
+}
+
+.md-nav__title {
+  display: none;
+}
+
+.md-nav__link {
+  font-size: 0.92rem;
+}
+
+.md-nav__link--active {
+  background: #04264B;
+  color: #ffffff !important;
+  padding: 0.25rem 0.55rem;
+}
+
+.md-nav__item--section > .md-nav__link {
+  color: #67c7ff;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.md-main__inner {
+  max-width: 1450px;
+  margin-left: 1rem;
+}
+
+.md-content {
+  max-width: 1100px;
+}
+
+.md-typeset {
+  font-size: 0.88rem;
+}
+
+.md-typeset h1 {
+  font-size: 1.9rem;
+  font-weight: 650;
+  color: #e8edf2;
+}
+
+.md-typeset h2 {
+  color: #e8edf2;
+  border-bottom: 1px solid #273441;
+  padding-bottom: 0.25rem;
+}
+
+
+.md-sidebar--secondary {
+  width: 250px;
+  opacity: 0.55;
+  background: rgba(255,255,255,0.03);
+  border-left: 1px solid #1d2b36;
+}
+
+.md-nav--secondary .md-nav__title {
+  background: transparent !important;
+  color: #8ba7bf !important;
+}
+
+/* v0.2 experiment: hide right-side page table of contents */
+.md-sidebar--secondary,
+.md-sidebar[data-md-type="toc"],
+.md-nav--secondary {
+  display: none !important;
+}
+
+/* ==========================================
+   SIDEBAR BADGE SIZE
+========================================== */
+
+.md-sidebar--primary > .md-sidebar__scrollwrap >
+.md-sidebar__inner >
+.md-nav--primary >
+.md-nav__title {
+  min-height: 360px !important;
+}
+
+.md-sidebar--primary > .md-sidebar__scrollwrap >
+.md-sidebar__inner >
+.md-nav--primary >
+.md-nav__title::after {
+  width: 420px !important;
+  height: 320px !important;
+  background-size: contain !important;
+  transform: translateY(-10px) !important;
+}
+
+/* ==========================================
+   SIDEBAR SCROLL STABILITY - STRONGER
+========================================== */
+
+.md-sidebar--primary {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100vh;
+}
+
+.md-main__inner {
+  margin-left: 360px;
+}
+
+/* ==========================================
+   FOOTER CLEANUP
+========================================== */
+
+.md-footer,
+.md-footer-meta,
+.md-footer-meta__inner,
+.md-footer-copyright {
+  display: none !important;
+}
