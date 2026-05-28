@@ -4,7 +4,7 @@
 
 The target pointing estimate combines known target coordinates with the spacecraft state estimate to produce an initial prediction of where the optical payload should look. The spacecraft state is derived from multiple navigation and attitude sources, typically including inertial measurement units (IMUs), star trackers, GNSS/GPS receivers, onboard time references, and orbital propagation models maintained by the flight computer. Together, these systems estimate spacecraft position, velocity, attitude, and timing, providing the geometric context needed to predict where a known ground target should appear relative to the spacecraft body frame.
 
-![](../../assets/images/target-pointing-estimate-raster-wrapper.svg)
+![](../assets/images/target-pointing-estimate-raster-wrapper.svg)
 
 The target location, typically represented as a known latitude, longitude, and elevation, is transformed through a sequence of coordinate systems to determine an expected line of sight relative to the payload. Depending on system architecture, this transformation chain may include Earth-centered inertial (ECI), Earth-centered Earth-fixed (ECEF), orbital reference frames, spacecraft body coordinates, and payload-specific alignment frames. Timing accuracy becomes important because even small offsets between spacecraft state estimation, propagated orbit position, and camera exposure timing can translate into meaningful pointing error.
 

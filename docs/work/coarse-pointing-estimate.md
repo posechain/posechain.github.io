@@ -10,7 +10,7 @@ The spacecraft body frame does not directly define where the payload optics are 
 
 The process begins with the estimated target direction produced by the Target Pointing Estimate stage. That direction, represented relative to the spacecraft body frame, is transformed into the reference frame of the Main Steering Mirror. Depending on payload architecture, this may involve fixed alignment offsets, optical boresight calibration terms, and coordinate transformations between spacecraft, payload, and actuator coordinate systems. The resulting geometry defines where the mirror must steer in order to align the optical path toward the expected target location.
 
-![](../../assets/images/coarse-pointing-estimate-raster-wrapper.svg)
+![](../assets/images/coarse-pointing-estimate-raster-wrapper.svg)
 
 The transformed line-of-sight vector is then converted into mirror commands, typically represented as roll and nod angles or equivalent actuator coordinates. These commands are intentionally approximate and are designed to place the target somewhere within the camera field of view rather than perfectly centered. Once the target becomes visible, visual perception and image-plane tracking progressively replace geometric prediction as the dominant pointing reference.
 

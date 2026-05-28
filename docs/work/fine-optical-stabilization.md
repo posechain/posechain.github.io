@@ -2,39 +2,28 @@
 
 ## Summary
 
-Fine Optical Stabilization represents the outcome of the complete tracking architecture.
+Fine Optical Stabilization represents the observable outcome of the complete tracking architecture.
 
-By this stage, the system has:
+By this stage, the system has estimated target geometry, positioned the optical line of sight, acquired the target, extracted geometric measurements, converted perception into image-space feedback, and applied high-bandwidth steering corrections through the Fast Steering Mirror.
 
-- estimated target geometry
-- positioned the optical line of sight
-- observed the target
-- extracted geometric measurements
-- converted perception into control signals
-- rejected disturbances through fine steering
+The result is a target that remains stable inside the image despite disturbance, uncertainty, and platform motion.
 
-The result is a target that remains stable inside the image despite uncertainty, disturbance, and platform motion.
-
-This stage is less about a single component and more about **system behavior**.
-
-It answers a practical engineering question:
+This stage is less about an individual component and more about **system behavior**. It answers the practical engineering question:
 
 **Did the architecture actually work?**
 
----
-
 ## Why It Exists
 
-Precision optical systems rarely fail because of one catastrophic issue.
+Precision optical systems rarely fail because of one catastrophic problem.
 
-They fail through accumulated small errors.
+They fail through the accumulation of many smaller effects.
 
 A target may technically remain visible while still suffering from:
 
 - excessive image motion
 - unstable measurements
 - intermittent tracking loss
-- degraded precision
+- degraded pointing precision
 - poor reacquisition performance
 
 The purpose of Fine Optical Stabilization is to reduce these residual effects until the system becomes operationally useful.
@@ -43,32 +32,7 @@ The objective is not theoretical perfection.
 
 The objective is:
 
-**stable, reliable tracking under real conditions**
-
----
-
-## Engineering Challenge
-
-The challenge is combining multiple imperfect subsystems into behavior that appears stable and predictable.
-
-Each subsystem introduces limitations:
-
-| System Element | Limitation |
-|----------------|------------|
-| Geometry Estimate | Uncertainty |
-| Coarse Steering | Limited bandwidth |
-| Camera Observation | Sampling and visibility limits |
-| Fiducial Detection | Measurement noise |
-| Tracking Error | Latency and filtering |
-| Fast Steering Mirror | Limited correction authority |
-
-No individual layer solves the problem alone.
-
-The engineering challenge is coordinating them so the total system behaves better than any single subsystem.
-
-This is ultimately a **systems integration problem**.
-
----
+**stable, repeatable tracking under real operating conditions**
 
 ## How It Works
 
@@ -80,15 +44,18 @@ The architecture continuously closes the loop between:
 → **steering correction**  
 → **updated observation**
 
-Over time, disturbances that would otherwise move the target are reduced before they grow large enough to break tracking.
+<!-- Future stabilization diagram or plot goes here -->
+<!-- ![](../assets/images/fine-optical-stabilization.svg) -->
 
-The stabilized result typically appears as:
+As disturbances move the target away from the desired image location, the perception and control system continuously generates corrections to reduce residual motion before tracking performance degrades. Over time, disturbances that would otherwise destabilize the image become attenuated by the combined action of the coarse steering system, visual feedback pipeline, and high-bandwidth Fast Steering Mirror.
+
+In practice, successful stabilization appears as:
 
 - reduced image motion
 - smaller residual tracking error
+- smoother target behavior
 - improved target persistence
-- smoother visual behavior
-- more reliable reacquisition
+- more reliable reacquisition after disturbance
 
 Importantly, stabilization is not a binary outcome.
 
@@ -102,139 +69,136 @@ The goal is:
 
 **acceptable residual error under realistic disturbance conditions**
 
----
-
 ## Why the Architecture Matters
 
-A key lesson from systems like this is that performance emerges from architecture decisions made much earlier.
+A key lesson from systems like this is that fine stabilization emerges from architectural decisions made much earlier in the design process.
 
-Fine stabilization becomes possible because responsibilities were separated:
+No individual subsystem solves the problem alone.
+
+The Main Steering Mirror provides acquisition authority but limited bandwidth.
+
+The camera and fiducial system provide observation but introduce measurement noise and sampling limitations.
+
+Image-plane tracking converts observation into feedback but introduces latency and filtering tradeoffs.
+
+The Fast Steering Mirror provides high-bandwidth correction but limited steering authority.
+
+Fine stabilization becomes possible because responsibilities are intentionally separated:
 
 | Layer | Responsibility |
 |--------|----------------|
-| Estimation | Approximate where to look |
+| Target Estimate | Approximate where to look |
 | Main Steering Mirror | Keep target observable |
 | Camera + Fiducial | Measure actual target location |
-| Image Plane Error | Generate feedback |
+| Image Plane Tracking Error | Generate feedback |
 | Fast Steering Mirror | Reject residual disturbance |
 
-This separation prevents any one subsystem from becoming overloaded.
+Rather than asking one mechanism to solve every problem poorly, the architecture distributes responsibility across layers. The result is a system that is more robust, easier to tune, and more tolerant of real-world disturbance environments.
 
-Instead of asking one mechanism to solve every problem poorly, the architecture distributes responsibility across layers.
-
-The result is a system that is:
-
-- more robust
-- easier to tune
-- more disturbance tolerant
-- more operationally resilient
-
----
-
-## Key Tradeoffs
+## Engineering Tradeoffs
 
 ### Precision vs Robustness
 
 A highly optimized system may achieve exceptional precision under ideal conditions.
 
-However, systems intended for real environments often benefit more from graceful degradation than peak performance.
+However, systems intended for real operating environments often benefit more from graceful degradation than peak performance.
 
 A system that remains usable through disturbance, uncertainty, and imperfect measurements is usually the stronger engineering choice.
 
----
-
 ### Aggressive Correction vs Stability
 
-Pushing control bandwidth too aggressively may reduce residual error in some scenarios.
+Increasing control bandwidth can reduce residual tracking error.
 
-But overly aggressive tuning often increases:
+However, aggressive tuning may also increase:
 
 - oscillation risk
-- noise sensitivity
+- sensitivity to measurement noise
 - instability
 - reacquisition difficulty
 
-Stability margins matter.
-
----
+High performance depends on maintaining adequate stability margins.
 
 ### Complexity vs Capability
 
 Multi-layer tracking architectures introduce:
 
-- more integration effort
+- greater integration effort
+- more calibration
 - more tuning
 - more failure modes
-- more calibration work
 
-However, they also unlock performance that simpler architectures often cannot achieve.
+However, they also enable performance levels that simpler architectures often cannot realistically achieve.
 
-The design becomes worthwhile when precision requirements exceed what body pointing or single-stage steering can realistically deliver.
-
----
+The complexity becomes worthwhile when precision requirements exceed what body pointing or single-stage steering can deliver.
 
 ## Implementation Considerations
 
 ### Performance Measurement
 
-Stabilization quality must be measured.
+Stabilization quality must be measured rather than assumed.
 
 Typical evaluation signals include:
 
 - residual image motion
-- tracking error statistics
-- reacquisition performance
+- image-plane tracking error statistics
 - target persistence
+- reacquisition performance
 - disturbance rejection effectiveness
 
-The engineering challenge is often determining:
+In practice, the engineering question often becomes:
 
 **good enough for mission success**
 
 rather than pursuing perfection indefinitely.
 
----
-
 ### Graceful Failure Modes
 
 Real systems occasionally lose tracking.
 
-Robust architectures include behaviors for:
+Robust architectures include strategies for:
 
 - temporary target loss
 - degraded confidence
 - coarse reacquisition
 - control saturation recovery
 
-Operational robustness often matters more than ideal-case performance.
-
----
+Operational resilience often matters more than ideal-case performance.
 
 ### Continuous Tuning
 
-Stabilization performance is environment dependent.
+Stabilization performance depends strongly on the disturbance environment.
 
-Different disturbance environments may favor different balances between:
+Different operating conditions may favor different balances between:
 
 - responsiveness
 - filtering
-- authority allocation
+- bandwidth allocation
 - robustness
 
 Tuning therefore becomes an ongoing systems activity rather than a one-time task.
 
----
-
 ## Key Takeaways
 
 - Fine Optical Stabilization represents the **end behavior of the full architecture**.
-- Stable performance emerges from **layered system design**, not one component.
+- Stable tracking emerges from **layered system design**, not any one component.
 - The system combines estimation, perception, and control into a unified feedback loop.
-- Real success means **stable operation under imperfect conditions**, not perfect tracking.
-- Architectural decomposition enables both **robustness and precision**.
+- Success means **stable operation under imperfect conditions**, not perfect tracking.
+- Architectural decomposition enables both **robust acquisition and precision stabilization**.
 
----
+## Back to System Summary
 
-## Back to System Overview
+<div style="display:flex; justify-content:space-between; align-items:center; margin-top:1rem;">
 
-[← Dual-Mirror Optical Tracking](dual-mirror-optical-tracking.md)
+  <div>
+    <a href="fast-steering-mirror.md">
+      ← Fast Steering Mirror
+    </a>
+  </div>
+
+  <div style="text-align:right;">
+    <a href="dual-mirror-optical-tracking.md">
+      Return to Dual-Mirror Optical Tracking →
+    </a>
+  </div>
+
+</div>

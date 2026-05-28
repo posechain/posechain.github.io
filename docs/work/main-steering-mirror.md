@@ -10,11 +10,11 @@ The result is a system that behaves more like a stabilized sensing instrument th
 
 The Main Steering Mirror receives roll and nod commands derived from the coarse pointing estimate. These commands reposition the optical line of sight so the predicted target location falls within the camera field of view. The mirror does not need to center the target precisely; its job is to absorb larger pointing offsets, compensate for slower geometry changes, and keep the acquisition problem small enough for camera-based perception to take over.
 
-![](../../assets/images/main-steering-mirror.svg)
+![](../assets/images/main-steering-mirror.svg)
 
 This architecture separates large-angle optical steering from high-bandwidth stabilization. Spacecraft attitude control remains responsible for global vehicle orientation, the Main Steering Mirror provides larger line-of-sight authority, and the Fast Steering Mirror removes residual image-plane motion after the target is acquired. That separation is important because a single actuator optimized for large angular travel usually cannot also provide the bandwidth and precision needed for fine optical stabilization.
 
-## Engineering Considerations
+## Engineering Considerations 
 
 The main engineering challenge is preserving correct geometry across the spacecraft body frame, payload alignment frame, mirror coordinate frame, and camera frame. Small sign errors, axis swaps, calibration offsets, or mirror convention mistakes can command motion in the wrong direction and make acquisition unreliable. The coarse steering layer also needs to respect mirror range limits, slew-rate constraints, actuator dynamics, and saturation behavior while still responding gracefully to target uncertainty or transient tracking loss.
 

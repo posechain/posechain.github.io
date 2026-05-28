@@ -4,260 +4,92 @@
 
 Detecting the target is not enough.
 
-The system must convert visual observation into something a control system can act on.
+The system must convert visual observation into a control signal.
 
-The Image Plane Tracking Error stage transforms geometric target measurements into a control-oriented signal by calculating how far the observed target deviates from the desired image location.
+The Image Plane Tracking Error stage transforms the detected marker position into a measurable deviation from where the target is intended to appear in the image. In this system, the desired location is assumed to be the center of the image plane for simplicity, though other reference locations could be used depending on mission objectives or optical constraints.
 
-This is the point where:
-
-**perception becomes control**
-
-The output is no longer simply an observation.
-
-It becomes an actionable error signal used to stabilize the optical line of sight.
-
----
-
-## Why It Exists
-
-Even with reliable target detection, the system still faces a practical question:
-
-**How should the platform respond?**
-
-A detected target position alone does not directly tell the system what correction to make.
-
-The control system instead needs:
-
-- direction of error
-- magnitude of error
-- stability of measurement
-- update timing
-- confidence in observation
-
-The Image Plane Tracking Error stage converts visual geometry into a measurable deviation from the desired target location.
-
-In simple terms:
-
-**where the target is**  
-minus  
-**where the target should be**
-
-becomes:
-
-**the correction signal**
-
-Without this step, downstream steering systems would have no meaningful feedback signal.
-
----
-
-## Engineering Challenge
-
-The challenge is converting image measurements into a signal that is both:
-
-**stable enough to control**  
-and  
-**responsive enough to correct disturbances**
-
-Real image measurements are imperfect.
-
-They contain:
-
-- noise
-- frame-to-frame variation
-- latency
-- temporary detection loss
-- quantization effects
-- environmental disturbances
-
-A controller reacting too aggressively to noisy measurements can create instability.
-
-A controller reacting too slowly allows tracking error to grow.
-
-The image-plane error stage therefore becomes a balancing act between:
-
-**responsiveness**  
-and  
-**measurement stability**
-
----
+This stage forms the architectural bridge between **perception and control**. The output is no longer simply an observation of where the marker exists in the image. Instead, it becomes an actionable feedback signal used to command the steering mirrors and stabilize the optical line of sight.
 
 ## How It Works
 
-The fiducial detector produces a measured target location in image coordinates.
+The ArUco fiducial detector provides a measured marker position in image coordinates. Because the marker contains a center corner, the system can identify a stable geometric reference point rather than relying on intensity centroids or ambiguous feature locations. The detected center is compared against a desired reference location, typically the image center, producing a horizontal and vertical image-space error.
 
-The system also defines a **desired target position**, typically near the center of the camera field of view.
+![](../assets/images/image-plane-tracking-error.svg)
 
-The tracking error is computed as the offset between these two locations.
+The resulting tracking error is represented in image coordinates:
 
-Conceptually:
+\[
+\Delta u = u_m - u_0
+\]
 
-**desired image location**  
-minus  
-**measured target location**
+\[
+\Delta v = v_m - v_0
+\]
 
-produces:
+where:
 
-**tracking error**
+- \(u_m, v_m\) are the measured marker center coordinates
+- \(u_0, v_0\) are the desired reference coordinates
 
-The resulting signal is typically represented in image-space coordinates, such as:
+The total image-plane tracking error can be represented as a vector:
 
-- horizontal image offset
-- vertical image offset
+\[
+\mathbf{e} =
+\begin{bmatrix}
+\Delta u \\
+\Delta v
+\end{bmatrix}
+\]
 
-These measurements become the feedback signal for downstream steering systems.
+with magnitude:
 
-When the target moves away from the desired location:
+\[
+|\mathbf{e}| =
+\sqrt{
+(\Delta u)^2 +
+(\Delta v)^2
+}
+\]
 
-- the error grows
-- corrective steering is commanded
-- the target is driven back toward the desired position
-
-The goal is not simply keeping the target visible.
-
-The goal is keeping it **stable and centered**.
-
----
+The controller uses these error components to determine how the mirrors should move to drive the marker back toward the reference point.
 
 ## Why Image-Space Error Matters
 
-An important architectural decision is that the controller operates in **image space**, not only physical pointing coordinates.
+A key architectural decision in this system is that control occurs in **image space**, not solely in predicted physical pointing coordinates.
 
-This provides several advantages.
+This approach offers an important practical advantage:
 
-### Direct Measurement of What Matters
+> If the image looks correct, the system is correct.
 
-The system directly controls observed target placement rather than relying entirely on predicted geometry.
+Rather than relying entirely on spacecraft geometry, calibration models, or actuator estimates, the controller responds to what the camera actually observes. This naturally compensates for many real-world effects that are difficult to model perfectly, including:
 
-In practice:
-
-**if the image looks correct, the system is correct**
-
-This makes the controller naturally tolerant of:
-
-- model inaccuracies
-- alignment error
-- calibration drift
-- platform disturbances
-
----
-
-### Unified Error Representation
-
-Many disturbance sources ultimately appear the same in image space.
-
-For example:
-
-- pointing error
-- vibration
-- estimation drift
+- pointing estimation error
+- alignment offsets
+- thermal distortion
 - structural flex
-- actuator imperfections
+- vibration
+- actuator nonlinearities
+- calibration drift
 
-All become:
+Many different disturbance sources ultimately appear the same to the controller:
 
-**target movement inside the image**
+**motion of the target inside the image**
 
-This creates a unified correction framework.
+This creates a unified feedback framework that allows the system to reject disturbances without explicitly modeling every disturbance source.
 
----
-
-### Improved Robustness
-
-Because feedback comes from actual observation, the system can compensate for effects that were never explicitly modeled.
-
-This often improves real-world performance compared with purely predictive approaches.
-
----
-
-## Key Tradeoffs
+## Engineering Tradeoffs
 
 ### Stability vs Responsiveness
 
-A highly responsive controller reacts quickly to disturbances.
+Image measurements contain noise, quantization effects, timing uncertainty, and occasional detection loss.
 
-However, aggressive response can amplify noise and create oscillation.
+A controller reacting too aggressively can amplify noise and oscillate.
 
-A more conservative controller improves stability but may allow larger residual error.
+A controller reacting too slowly allows tracking error to grow.
 
-This trade becomes especially important when visual measurements are noisy or delayed.
+This creates a balancing problem between:
 
----
-
-### Precision vs Field-of-View Margin
-
-Keeping the target tightly centered improves pointing precision.
-
-However, aggressive centering behavior may increase the chance of temporary target loss during disturbances.
-
-In many systems:
-
-**stable tracking beats fragile perfection**
-
----
-
-### Filtering vs Latency
-
-Filtering improves measurement stability.
-
-But filtering also introduces delay.
-
-In a closed-loop tracking system, even modest latency can meaningfully affect disturbance rejection performance.
-
-Choosing how much filtering to apply becomes a control problem as much as a perception problem.
-
----
-
-## Implementation Considerations
-
-### Coordinate Conventions
-
-Sign conventions matter.
-
-A simple coordinate mismatch between image axes and steering commands can invert control behavior and destabilize tracking.
-
-Careful frame definition becomes essential.
-
----
-
-### Pixel-to-Command Mapping
-
-The system must relate image error to steering authority.
-
-Questions include:
-
-- how many pixels correspond to meaningful correction?
-- when should correction saturate?
-- how aggressively should motion be commanded?
-
-These relationships often evolve through testing.
-
----
-
-### Measurement Confidence
-
-Not every frame should be trusted equally.
-
-The controller may reduce authority or transition to degraded modes when:
-
-- confidence drops
-- measurements disappear
-- tracking quality degrades
-
-Reliable systems assume imperfect perception.
-
----
-
-## Key Takeaways
-
-- Image Plane Tracking Error transforms **observation into feedback**.
-- This is the architectural bridge between **perception and control**.
-- The controller responds to **image-space deviation**, not only predicted geometry.
-- Real systems balance responsiveness, filtering, and robustness.
-- Stable tracking often matters more than mathematically perfect centering.
-
----
-
-## Back to System Overview
-
-[← Dual-Mirror Optical Tracking](dual-mirror-optical-tracking.md)
-[Continue to Fast Steering Mirror →](fast-steering-mirror.md)
+```text
+responsiveness
+↔
+measurement stability

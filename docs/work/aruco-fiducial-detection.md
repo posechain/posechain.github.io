@@ -2,217 +2,106 @@
 
 ## Summary
 
-Observing the target is only the first step.
+The ArUco Fiducial Detection stage converts the camera image into a structured geometric measurement that downstream pointing and stabilization logic can use. In this system, the ArUco marker serves as a cooperative visual reference target: once the camera observes the marker, the software can estimate marker identity, image-plane position, corner locations, and relative pose instead of relying on ambiguous brightness blobs or appearance-only tracking.
 
-The system must next convert camera imagery into a reliable geometric measurement that downstream control loops can use.
-
-Rather than relying on simple brightness tracking or object centroiding, the system uses a **cooperative visual reference target based on an ArUco fiducial**. This provides a structured geometric reference that is substantially more robust to scale changes, perspective shifts, partial visibility, and environmental variation.
-
-The result is a tracking signal that behaves more like a measured reference geometry than a guessed visual feature.
-
----
-
-## Why It Exists
-
-A camera image alone does not provide a control signal.
-
-The system needs a reliable answer to a practical question:
-
-**Where is the target in the image, and how confident are we?**
-
-Simple approaches such as blob tracking or brightest-point detection tend to degrade quickly when conditions change.
-
-Real-world imagery introduces problems such as:
-
-- changing lighting
-- motion blur
-- varying target scale
-- partial occlusion
-- background clutter
-- changing viewing angles
-
-A cooperative fiducial solves many of these challenges by embedding geometry directly into the target itself.
-
-Instead of searching for ambiguous image features, the system observes a known reference pattern with predictable structure.
-
-This transforms detection from:
-
-**"find something that looks similar"**
-
-into:
-
-**"measure a known geometric object"**
-
----
-
-## Engineering Challenge
-
-The challenge is balancing:
-
-**measurement precision**  
-with  
-**detection robustness**
-
-The detector must produce measurements that are:
-
-- repeatable
-- low-noise
-- computationally efficient
-- tolerant of imperfect imagery
-- reliable across changing conditions
-
-Importantly, failure behavior matters almost as much as success behavior.
-
-A detector that occasionally produces incorrect confident measurements can destabilize a control system more than one that simply reports uncertainty.
-
----
+An ArUco marker is a square, high-contrast fiducial pattern with a known binary code and known geometry. The detector searches the image for candidate square regions, decodes the marker identity, refines the detected corner locations, and uses the known marker geometry with camera calibration to estimate pose. This makes ArUco useful for cooperative tracking in well-lit environments where the target can be designed, printed, mounted, and illuminated in a controlled way.
 
 ## How It Works
 
-The camera image is continuously processed to identify the cooperative fiducial marker.
+The ArUco detector receives camera frames after the Main Steering Mirror has placed the expected target within the field of view. The detection pipeline identifies square marker candidates, rejects invalid patterns, decodes the marker ID, refines the corner locations, and produces a geometric measurement. The most useful outputs for this tracking architecture are the marker center in image coordinates, the detected corner positions, and the relative pose of the marker with respect to the camera.
 
-The ArUco pattern provides a structured set of recognizable visual features, typically including:
+![](../assets/images/aruco-fiducial-detection.svg)
 
-- identifiable corners
-- encoded marker identity
-- geometric orientation
-- scale information
+This stage is also where optical design and computer vision meet. A wider camera field of view improves the chance of acquiring the marker after coarse pointing uncertainty, but it also spreads the same sensor pixels over a larger angular region. That reduces the number of pixels across a marker of fixed physical size and range, which can make detection, corner refinement, and pose estimation less reliable. A narrower field of view improves pixel density and angular precision, but it demands better upstream pointing to keep the marker in frame.
 
-Once detected, the system estimates a stable target reference point using the fiducial geometry.
+## Field of View and Marker Size
 
-Rather than relying on a single image feature, the detector uses multiple geometric constraints simultaneously.
+For a square marker with physical side length \(L\) observed at range \(R\), the approximate angular size of the marker is:
 
-Typical processing stages include:
+\[
+\theta_{marker} = 2 \tan^{-1}\left(\frac{L}{2R}\right)
+\]
 
-1. Candidate fiducial detection  
-2. Marker identification  
-3. Corner localization refinement  
-4. Geometric consistency validation  
-5. Stable target reference estimation
+For small angles, this is approximately:
 
-The output becomes a measured image-space reference that downstream tracking logic can use.
+\[
+\theta_{marker} \approx \frac{L}{R}
+\]
 
-At this stage, the system transitions from:
+If the horizontal field of view is \(\theta_{FOV,h}\), the marker must fit within the camera field of view with enough margin for pointing uncertainty, motion, and detection robustness:
 
-**camera observation**  
-to  
-**measured target geometry**
+\[
+\theta_{FOV,h} \geq \theta_{marker} + 2m
+\]
 
----
+where \(m\) is an angular margin on each side. This relationship captures the acquisition trade: a wider FOV makes it easier to get the marker into the image, while a narrower FOV gives more pixels per degree once the marker is visible.
 
-## Why Fiducials Instead of Simple Tracking?
+A useful pixel-coverage estimate is:
 
-Many visual tracking systems begin with simpler approaches such as:
+\[
+N \approx \frac{f_{px} L}{R}
+\]
 
-- brightest-point tracking
-- thresholded blobs
-- centroid estimation
-- feature matching
+where \(N\) is the marker width in pixels and \(f_{px}\) is the camera focal length expressed in pixels. In practice, reliable detection needs enough marker pixels to resolve the black and white cell pattern, reject false candidates, and localize the four corners. Very small markers may still be visible but may not be reliable enough for closed-loop control.
 
-These approaches can work well in controlled conditions.
+## Angular Accuracy from Sub-Pixel Centering
 
-However, they often become fragile when:
+OpenCV’s ArUco pipeline can refine marker corners to sub-pixel precision before pose estimation or image-plane measurement. The practical angular limit from image-space centering can be estimated from the pinhole camera model. If the marker center uncertainty is \(\sigma_{pix}\) pixels and the focal length is \(f_{px}\) pixels, then the approximate one-sigma angular uncertainty is:
 
-- target size changes
-- perspective changes
-- lighting varies
-- partial obstruction occurs
-- false features appear
+\[
+\sigma_{\theta} \approx \frac{\sigma_{pix}}{f_{px}}
+\]
 
-A fiducial-based approach improves robustness because the system is measuring **known structure**, not simply reacting to image appearance.
+At range \(R\), the corresponding transverse pointing uncertainty is approximately:
 
-The marker provides:
+\[
+\sigma_{point} \approx R \sigma_{\theta}
+\]
 
-- geometric redundancy
-- built-in orientation information
-- scale awareness
-- identity confirmation
-- better rejection of false positives
+or:
 
-In practice, this generally improves tracking reliability and reacquisition performance.
+\[
+\sigma_{point} \approx R \frac{\sigma_{pix}}{f_{px}}
+\]
 
----
+This is a best-case image-measurement relationship, not a full system pointing error budget. Real performance also depends on illumination, focus, lens distortion calibration, motion blur, marker print quality, exposure time, rolling-shutter effects, corner refinement settings, and filtering latency.
 
-## Key Tradeoffs
+## Processing Load
 
-### Detection Robustness vs Computational Cost
+ArUco detection is computationally efficient compared with many general-purpose feature-tracking or neural-network perception methods, but it is not free. The detector must threshold or segment the image, search for contours or square candidates, validate candidate geometry, decode marker IDs, optionally refine corners, and solve pose using camera intrinsics. Processing cost scales with image resolution, the number of candidate regions, dictionary size, and the amount of refinement performed.
 
-More sophisticated refinement improves measurement quality but increases processing requirements and latency.
-
-The challenge is producing stable measurements without introducing unnecessary delay into the control pipeline.
-
----
-
-### Sensitivity vs False Positives
-
-Aggressive detection settings may improve acquisition.
-
-However, overly permissive detection increases the chance of unstable or incorrect measurements.
-
-In control systems, incorrect confidence can be more dangerous than temporary uncertainty.
-
----
-
-### Precision vs Reliability
-
-Sub-pixel refinement can improve measurement quality.
-
-But real systems often benefit more from stable, repeatable measurements than from fragile peak precision.
-
-The best detector is rarely the mathematically most precise one.
-
-It is the one that behaves predictably under imperfect conditions.
-
----
-
-## Implementation Considerations
-
-### Corner Refinement
-
-Measurement quality depends heavily on corner localization accuracy.
-
-Small pixel-level errors propagate directly into downstream tracking performance.
-
-Because of this, refinement and filtering often matter more than raw detection.
-
----
-
-### Confidence Management
-
-Detection confidence becomes an important systems signal.
-
-The system may:
-
-- reject uncertain measurements
-- temporarily coast on prior estimates
-- transition to reacquisition behavior
-- fall back to coarse pointing
-
-Robust systems assume perception occasionally fails.
-
----
-
-### Timing and Latency
-
-Detection takes time.
-
-The perception system operates inside a broader closed-loop architecture, meaning latency directly affects stabilization performance.
-
-Measurement quality must therefore be balanced against responsiveness.
-
----
+For a real-time optical tracking system, this cost matters because perception latency directly affects the control loop. Higher resolution may improve marker pixel coverage and pose quality, but it also increases frame-processing time. A practical implementation should measure detection latency on the target processor and select image resolution, region of interest, dictionary size, and refinement settings as part of the control-system design rather than treating vision performance as independent from stabilization performance.
 
 ## Key Takeaways
 
-- ArUco detection converts imagery into **usable geometric measurement**.
-- Fiducials provide greater robustness than appearance-only tracking methods.
-- The system estimates a **structured geometric reference**, not a simple blob center.
-- Detection reliability matters as much as peak precision.
-- Perception quality directly influences downstream stabilization performance.
+- ArUco detection converts camera imagery into a structured geometric measurement.
+- The marker provides identity, corner locations, image-plane center, and relative pose information.
+- Field of view, marker size, range, and pixel coverage are tightly coupled.
+- Wider FOV improves acquisition probability but reduces pixel density on the marker.
+- Sub-pixel corner and center refinement can improve angular accuracy, but only within the limits of optics, calibration, exposure, and processing latency.
+- Processor load must be managed because detection latency becomes part of the closed-loop tracking problem.
 
----
+## References
 
-## Back to System Overview
+- [OpenCV ArUco marker detection documentation](https://docs.opencv.org/4.x/d5/dae/tutorial_aruco_detection.html)
+- [OpenCV ArUco detector parameters and corner refinement](https://docs.opencv.org/4.x/d1/dcd/structcv_1_1aruco_1_1DetectorParameters.html)
+- [Garrido-Jurado et al., “Automatic generation and detection of highly reliable fiducial markers under occlusion,” Pattern Recognition, 2014](https://doi.org/10.1016/j.patcog.2014.01.005)
+- [Pinhole camera model notes, University of Amsterdam](https://staff.fnwi.uva.nl/r.vandenboomgaard/IPCV20162017/LectureNotes/CV/PinholeCamera/PinholeCamera.html)
 
-[← Dual-Mirror Optical Tracking](dual-mirror-optical-tracking.md)
-[Continue to Image Plane Tracking Error →](image-plane-tracking-error.md)
+## Back to System Summary
+
+<div style="display:flex; justify-content:space-between; align-items:center; margin-top:1rem;">
+
+  <div>
+    <a href="camera-observation.md">
+      ← Camera Observation
+    </a>
+  </div>
+
+  <div style="text-align:right;">
+    <a href="image-plane-tracking-error.md">
+      Continue to Image Plane Tracking Error →
+    </a>
+  </div>
+
+</div>

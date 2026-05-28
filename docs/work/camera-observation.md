@@ -2,217 +2,43 @@
 
 ## Summary
 
-The Camera Observation stage converts an estimated target direction into something measurable.
+The Camera Observation stage marks the transition from geometric prediction to direct visual sensing. Up to this point, the system relies primarily on spacecraft state knowledge, target geometry, and mirror pointing estimates to place the expected target within the camera field of view. Once the target becomes visible, the optical system can begin observing the real scene and refining pointing based on measured image data rather than prediction alone.
 
-At this point in the system, coarse steering has positioned the optical line of sight near the expected target location. The camera now attempts to observe a **cooperative visual reference target** within a constrained field of view and under imperfect conditions.
-
-This stage sounds deceptively simple: *point camera, see target.*
-
-In practice, observability becomes one of the defining constraints of the entire architecture.
-
-A target that cannot be reliably observed cannot be tracked, stabilized, or controlled.
-
----
-
-## Why It Exists
-
-The upstream system provides an estimate of where the target should be.
-
-The camera answers a different question:
-
-**Where is the target actually?**
-
-Even good geometric estimates contain uncertainty due to:
-
-- position estimation error
-- timing offsets
-- platform motion
-- target motion
-- pointing disturbances
-- actuator imperfections
-
-The camera closes this uncertainty gap by providing direct observation.
-
-Without a visual observation layer, the system would operate open-loop and drift over time.
-
-The camera therefore acts as the system’s **truth sensor**, transforming estimated geometry into measurable reality.
-
----
-
-## Engineering Challenge
-
-The challenge is straightforward to describe and surprisingly difficult to solve:
-
-**observe a moving target reliably in imperfect conditions**
-
-Several competing constraints make this difficult.
-
-### Limited Field of View
-
-A narrow field of view improves measurement resolution but reduces acquisition tolerance.
-
-A wider field of view improves robustness but reduces precision.
-
-This creates a constant systems trade:
-
-**visibility vs measurement quality**
-
----
-
-### Imperfect Visibility
-
-Real imaging conditions are rarely ideal.
-
-Observation quality changes due to:
-
-- lighting variation
-- motion blur
-- changing perspective
-- partial occlusion
-- vibration
-- atmospheric effects
-- sensor noise
-
-A tracking system must remain functional even when measurements become intermittent or degraded.
-
----
-
-### Temporal Constraints
-
-The system only receives information at the camera frame rate.
-
-Unlike continuous sensing, observation occurs in discrete updates.
-
-Between frames:
-
-- the platform moves
-- the target moves
-- disturbances continue
-
-The rest of the control system must operate despite delayed and sampled information.
-
----
+In this system, the cooperative visual target is an ArUco fiducial marker. ArUco markers are patterned visual targets designed for reliable detection and pose estimation using a camera. Because the geometry of the marker is known in advance, the system can estimate both target location and orientation relative to the camera. This makes them especially useful in controlled or well-lit environments where deterministic tracking performance is more important than broad environmental robustness.
 
 ## How It Works
 
-The Main Steering Mirror positions the expected target location inside the camera’s field of view.
+The Main Steering Mirror places the expected target location within the camera field of view using the coarse pointing estimate. Once visible, the camera provides direct image measurements of the scene, allowing the system to begin correcting for uncertainty in spacecraft state estimation, mirror calibration, timing offsets, and other geometric assumptions that accumulate through the upstream pointing process.
 
-The camera then acquires imagery and continuously searches for the cooperative visual reference target.
+![](../assets/icons/aruco-fiducial-detection-offsetfixed.svg){ width="25%" }
 
-At this stage, the objective is not yet precision stabilization.
+Rather than immediately performing precision stabilization, the camera observation layer establishes whether the target has been successfully acquired and supplies visual information for downstream perception algorithms. In this implementation, the system uses an ArUco fiducial marker because it enables robust target localization and relative pose estimation with comparatively lightweight computation. The detailed detection process, marker identification, and pose-solving pipeline are handled in the following stage.
 
-The goal is:
+## Engineering Considerations
 
-**maintain reliable target observability**
-
-This includes:
-
-- confirming target presence
-- maintaining target visibility
-- collecting imagery for geometric estimation
-- supporting reacquisition after temporary loss
-
-If the target leaves the field of view, downstream stabilization becomes impossible.
-
-Because of this, maintaining observation quality is often more important than maximizing precision.
-
-In many systems:
-
-**stable visibility beats fragile precision**
-
----
-
-## Key Tradeoffs
-
-### Narrow FOV vs Wide FOV
-
-A narrower field of view improves angular precision and tracking sensitivity.
-
-However, it becomes easier to lose the target during disturbances or estimation error.
-
-A wider field of view improves acquisition robustness but reduces effective measurement precision.
-
-Choosing the operating field of view becomes a systems optimization problem rather than a purely optical one.
-
----
-
-### Frame Rate vs Image Quality
-
-Higher frame rates improve responsiveness and reduce latency.
-
-However, they often require tradeoffs in:
-
-- exposure time
-- signal quality
-- resolution
-- processing budget
-
-The optimal solution depends on the disturbance environment and control bandwidth requirements.
-
----
-
-### Sensitivity vs Robustness
-
-Aggressive detection settings may increase sensitivity in ideal conditions.
-
-But systems intended for real operation often benefit from conservative observation strategies that tolerate imperfect imagery.
-
-Reliable reacquisition is frequently more valuable than fragile peak performance.
-
----
-
-## Implementation Considerations
-
-### Camera Geometry
-
-The camera introduces its own coordinate system and optical distortion characteristics.
-
-Lens calibration and geometric consistency matter because downstream control depends on accurate image measurements.
-
-Small calibration errors can produce measurable pointing offsets.
-
----
-
-### Synchronization
-
-Timing matters.
-
-Observation timestamps must remain aligned with:
-
-- platform state estimates
-- steering commands
-- control loops
-
-Even modest timing offsets can introduce tracking instability or degraded pointing accuracy.
-
----
-
-### Failure Modes
-
-The observation layer must tolerate temporary target loss.
-
-Typical recovery behaviors include:
-
-- confidence scoring
-- reacquisition search behavior
-- fallback to coarse estimates
-- temporary degraded tracking modes
-
-A robust system plans for imperfect visibility rather than assuming continuous ideal observations.
-
----
+Camera observation sits at an important systems boundary between prediction and perception. Acquisition performance depends not only on camera quality, but also on optical field of view, exposure settings, target visibility, illumination, motion blur, and the accuracy of upstream coarse pointing. Even a strong perception algorithm performs poorly if the target never enters the camera field of view or appears too small, blurred, or poorly illuminated for reliable detection.
 
 ## Key Takeaways
 
-- The camera transforms **estimated target location into measured observation**.
-- Observability is a foundational requirement for stabilization and control.
-- Field of view, frame rate, and robustness are tightly coupled design trades.
-- Real systems must tolerate degraded or intermittent imagery.
-- Reliable observation often matters more than theoretical peak precision.
+- Camera observation transitions the system from prediction to visual sensing.
+- The Main Steering Mirror places the target inside the camera field of view.
+- ArUco markers were selected for reliable detection and pose estimation in cooperative, well-lit environments.
+- Visual measurements progressively replace geometric prediction as the dominant pointing reference.
 
----
+## Back to System Summary
 
-## Back to System Overview
+<div style="display:flex; justify-content:space-between; align-items:center; margin-top:1rem;">
 
-[← Dual-Mirror Optical Tracking](dual-mirror-optical-tracking.md)
-[Continue to ArUco Fiducial Detection →](aruco-fiducial-detection.md)
+  <div>
+    <a href="main-steering-mirror.md">
+      ← Main Steering Mirror
+    </a>
+  </div>
+
+  <div style="text-align:right;">
+    <a href="aruco-fiducial-detection.md">
+      Continue to ArUco Fiducial Detection →
+    </a>
+  </div>
+
+</div>
