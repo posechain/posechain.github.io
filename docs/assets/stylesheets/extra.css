@@ -28,6 +28,25 @@
   justify-content: center;
 }
 
+.flow-card-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  height: 100%;
+}
+
+.flow-card-link:hover {
+  text-decoration: none;
+}
+
+.flow-card-link:visited {
+  color: inherit;
+}
+
 .flow-arrow {
   display: none;
 }
@@ -61,3 +80,101 @@
   margin-bottom: 0.75rem;
   opacity: 0.96;
 }
+
+/* Add + / − only to nested expandable items, not top-level section headers */
+.md-nav__item--nested:not(.md-nav__item--section) > .md-nav__link::before {
+  content: "+";
+  display: inline-block;
+  width: 1rem;
+  margin-right: 0.25rem;
+  font-weight: 700;
+  color: #8fd3ff;
+}
+
+.md-nav__item--nested:not(.md-nav__item--section)
+  .md-nav__toggle:checked ~ .md-nav__link::before {
+  content: "−";
+}
+
+/* Add + / − only to expandable items, not top-level section headers */
+.md-nav__item--nested:not(.md-nav__item--section) > .md-nav__link::before {
+  content: "+";
+  display: inline-block;
+  width: 1rem;
+  margin-right: 0.25rem;
+  font-weight: 700;
+  color: #8fd3ff;
+}
+
+.md-nav__item--nested:not(.md-nav__item--section)
+  .md-nav__toggle:checked ~ .md-nav__link::before {
+  content: "−";
+}
+
+/* Reset link padding so Material + our CSS don't double-indent */
+.md-nav--primary .md-nav__link {
+  padding-left: 0 !important;
+}
+
+/* Indent by nesting the child lists, so indent appears before +/- */
+.md-nav--primary .md-nav .md-nav {
+  margin-left: 0.85rem;
+}
+
+/* Keep the top-level section header flush */
+.md-nav--primary > .md-nav__list > .md-nav__item--section > .md-nav__link {
+  color: #8fd3ff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-left: 0;
+}
+
+.md-nav--primary > .md-nav__list > .md-nav__item--section > .md-nav__link {
+  color: #8fd3ff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ==========================================
+   CONTACT PAGE
+========================================== */
+
+.contact-card {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(10, 20, 35, 0.75);
+  border: 1px solid rgba(100, 140, 200, 0.25);
+  border-radius: 14px;
+}
+
+.contact-qr img {
+  width: 180px;
+  height: 180px;
+  background: white;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+.contact-qr-caption {
+  margin-top: 0.6rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #8fd3ff;
+}
+
+.contact-info {
+  flex: 1;
+}
+
+@media screen and (max-width: 700px) {
+  .contact-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+

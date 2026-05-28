@@ -101,8 +101,8 @@
 /* Visually move header search into sidebar area */
 .md-search {
   position: fixed;
-  top: 240px;
-  left: 38px;
+  top: 340px;
+  left: 20px;
   width: 304px;
   padding: 0;
   background: transparent;
@@ -190,5 +190,53 @@
 .md-sidebar--secondary,
 .md-sidebar[data-md-type="toc"],
 .md-nav--secondary {
+  display: none !important;
+}
+
+/* ==========================================
+   SIDEBAR BADGE SIZE
+========================================== */
+
+.md-sidebar--primary > .md-sidebar__scrollwrap >
+.md-sidebar__inner >
+.md-nav--primary >
+.md-nav__title {
+  min-height: 360px !important;
+}
+
+.md-sidebar--primary > .md-sidebar__scrollwrap >
+.md-sidebar__inner >
+.md-nav--primary >
+.md-nav__title::after {
+  width: 420px !important;
+  height: 320px !important;
+  background-size: contain !important;
+  transform: translateY(-10px) !important;
+}
+
+/* ==========================================
+   SIDEBAR SCROLL STABILITY - STRONGER
+========================================== */
+
+.md-sidebar--primary {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100vh;
+}
+
+.md-main__inner {
+  margin-left: 360px;
+}
+
+/* ==========================================
+   FOOTER CLEANUP
+========================================== */
+
+.md-footer,
+.md-footer-meta,
+.md-footer-meta__inner,
+.md-footer-copyright {
   display: none !important;
 }

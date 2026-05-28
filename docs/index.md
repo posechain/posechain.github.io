@@ -32,6 +32,7 @@ Precision optical tracking under latency, disturbance, and real-time control con
 **Themes:** Controls • Prediction • Optical Tracking • Disturbance Suppression • Real-Time Systems
 
 [Explore the case study](work/dual-mirror-optical-tracking.md)
+
 ---
 
 ### Distributed Robotics & Multi-Node Architecture
@@ -52,10 +53,3 @@ Multidisciplinary engineering spanning payload objectives, system constraints, a
 
 [Explore the case study](work/space-systems-payload-integration.md)
 
----
-
-## Approach
-
-I gravitate toward technically difficult integration problems where software, controls, hardware, sensing, and system-level behavior intersect.
-
-My role is often to reduce technical risk by connecting disciplines, debugging difficult problems, and translating mission goals into practical engineering solutions.

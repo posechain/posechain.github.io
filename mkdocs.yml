@@ -2,9 +2,11 @@ site_name: Posechain Engineering Portfolio
 site_description: Engineering Portfolio
 site_author: Jason Force
 site_url: https://posechain.github.io
+copyright: ""
 
 theme:
   name: material
+
   custom_dir: overrides
   logo: assets/images/posechain-logo.png
   favicon: assets/images/favicon.png
@@ -14,7 +16,9 @@ theme:
     accent: light blue
   features:
     - navigation.sections
-    - navigation.expand
+    - navigation.instant
+    - navigation.instant.progress
+    # - navigation.expand
     - navigation.top
     - search.suggest
     - search.highlight
@@ -37,13 +41,24 @@ markdown_extensions:
   - pymdownx.inlinehilite
 
 nav:
-  - About This Portfolio: index.md
-  - Selected Work: selected-work.md
-  - Resume: resume.md
+  - About Jason Force: index.md
+  # - Selected Work: selected-work.md
+  - Professional Materials:
+      - Resume:
+          - Space-Focused Resume: resume/space.md
+          - Perception-Focused Resume: resume/perception.md
   - Contact: contact.md
   - Engineering Case Studies:
       - Dual-Mirror Optical Tracking:
           - Summary: work/dual-mirror-optical-tracking.md
+          - Target Pointing Estimate: work/target-pointing-estimate.md
+          - Coarse Pointing Estimate: work/coarse-pointing-estimate.md
+          - Main Steering Mirror: work/main-steering-mirror.md
+          - Camera Observation: work/camera-observation.md
+          - ArUco Fiducial Detection: work/aruco-fiducial-detection.md
+          - Image Plane Tracking Error: work/image-plane-tracking-error.md
+          - Fast Steering Mirror: work/fast-steering-mirror.md
+          - Fine Optical Stabilization: work/fine-optical-stabilization.md
       - Distributed Robotics:
           - Summary: work/distributed-robotics.md
       - Space Systems & Integration:

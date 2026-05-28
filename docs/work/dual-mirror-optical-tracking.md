@@ -19,72 +19,82 @@ The system performed closed-loop stabilization using a dual-mirror optical archi
 
 <div class="system-flow">
 
-<div class="flow-card">
-<img class="flow-icon-img"
-     src="../../assets/icons/estimated-ground-track.svg"
-     alt="Estimated ground track">
+  <div class="flow-card">
+    <a class="flow-card-link" href="../target-pointing-estimate/">
+      <img class="flow-icon-img"
+           src="../../assets/icons/estimated-ground-track.svg"
+           alt="Target Pointing Estimate">
+      <span class="flow-title">Target Pointing Estimate</span> 
+    </a>
+  </div>
 
-<div class="flow-title">
-Estimated<br>Ground Track
+  <div class="flow-card">
+    <a class="flow-card-link" href="../coarse-pointing-estimate/">
+      <img class="flow-icon-img"
+           src="../../assets/icons/coarse-pointing-estimate.svg"
+           alt="Coarse Pointing Estimate">
+      <span class="flow-title">Coarse Pointing Estimate</span>
+    </a>
+  </div>
+
+  <div class="flow-card">
+    <a class="flow-card-link" href="../main-steering-mirror/">
+      <img class="flow-icon-img"
+           src="../../assets/icons/main-steering-mirror-final-fixed.svg"
+           alt="Main Steering Mirror">
+      <span class="flow-title">Main Steering Mirror</span>
+    </a>
+  </div>
+
+  <!-- intentionally swapped icon assignment -->
+  <div class="flow-card">
+    <a class="flow-card-link" href="../camera-observation/">
+      <img class="flow-icon-img"
+           src="../../assets/icons/aruco-fiducial-detection-offsetfixed.svg"
+           alt="Camera Observation">
+      <span class="flow-title">Camera Observation</span>
+    </a>
+  </div>
+
+  <!-- intentionally swapped icon assignment -->
+  <div class="flow-card">
+    <a class="flow-card-link" href="../aruco-fiducial-detection/">
+      <img class="flow-icon-img"
+           src="../../assets/icons/image-plane-tracking-error-centered-thinborder.svg"
+           alt="ArUco Fiducial Detection">
+      <span class="flow-title">ArUco Fiducial Detection</span>
+    </a>
+  </div>
+
+  <!-- intentionally swapped icon assignment -->
+  <div class="flow-card">
+    <a class="flow-card-link" href="../image-plane-tracking-error/">
+      <img class="flow-icon-img"
+           src="../../assets/icons/camera-observation-centered-thinborder.svg"
+           alt="Image Plane Tracking Error">
+      <span class="flow-title">Image Plane Tracking Error</span>
+    </a>
+  </div>
+
+  <div class="flow-card">
+    <a class="flow-card-link" href="../fast-steering-mirror/">
+      <img class="flow-icon-img"
+           src="../../assets/icons/fast-steering-mirror-literal.svg"
+           alt="Fast Steering Mirror">
+      <span class="flow-title">Fast Steering Mirror</span>
+    </a>
+  </div>
+
+  <div class="flow-card">
+    <a class="flow-card-link" href="../fine-optical-stabilization/">
+      <img class="flow-icon-img"
+           src="../../assets/icons/fine-optical-stabilization-normalized.svg"
+           alt="Fine Optical Stabilization">
+      <span class="flow-title">Fine Optical Stabilization</span>
+    </a>
+  </div>
+
 </div>
-</div>
-
-<div class="flow-arrow">→</div>
-
-<div class="flow-card">
-<img class="flow-icon-img"
-     src="../../assets/icons/coarse-pointing-estimate.svg"
-     alt="Coarse pointing estimate">
-
-<div class="flow-title">
-Coarse Pointing<br>Estimate
-</div>
-</div>
-
-<div class="flow-arrow">→</div>
-
-<div class="flow-card">
-<div class="flow-icon">🪞</div>
-<div class="flow-title">Main Steering<br>Mirror</div>
-</div>
-
-<div class="flow-arrow">→</div>
-
-<div class="flow-card">
-<div class="flow-icon">📷</div>
-<div class="flow-title">Camera<br>Observation</div>
-</div>
-
-<div class="flow-arrow">→</div>
-
-<div class="flow-card">
-<div class="flow-icon">⬛</div>
-<div class="flow-title">ArUco Fiducial<br>Detection</div>
-</div>
-
-<div class="flow-arrow">→</div>
-
-<div class="flow-card">
-<div class="flow-icon">⊕</div>
-<div class="flow-title">Image-Plane<br>Tracking Error</div>
-</div>
-
-<div class="flow-arrow">→</div>
-
-<div class="flow-card">
-<div class="flow-icon">⚡</div>
-<div class="flow-title">Fast Steering<br>Mirror (FSM)</div>
-</div>
-
-<div class="flow-arrow">→</div>
-
-<div class="flow-card">
-<div class="flow-icon">✨</div>
-<div class="flow-title">Fine Optical<br>Stabilization</div>
-</div>
-
-</div>
-
 ---
 
 ## Problem Context
