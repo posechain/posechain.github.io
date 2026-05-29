@@ -87,9 +87,16 @@ A controller reacting too aggressively can amplify noise and oscillate.
 
 A controller reacting too slowly allows tracking error to grow.
 
-This creates a balancing problem between:
+## Back to System Summary
 
-```text
-responsiveness
-↔
-measurement stability
+<div style="display:flex; justify-content:space-between; gap:1rem; margin-top:1rem;">
+
+  <a class="md-button" href="../aruco-fiducial-detection/">
+    ← ArUco Fiducial Detection
+  </a>
+
+  <a class="md-button md-button--primary" href="../fast-steering-mirror/">
+    Continue to Fast Steering Mirror →
+  </a>
+
+</div>

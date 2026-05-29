@@ -1,7 +1,7 @@
 site_name: Posechain Engineering Portfolio
 site_description: Engineering Portfolio
 site_author: Jason Force
-site_url: https://posechain.github.io
+site_url: https://posechain.github.io/
 copyright: ""
 
 theme:
@@ -16,8 +16,8 @@ theme:
     accent: light blue
   features:
     - navigation.sections
-    - navigation.instant
-    - navigation.instant.progress
+    # - navigation.instant
+    # - navigation.instant.progress
     # - navigation.expand
     - navigation.top
     - search.suggest

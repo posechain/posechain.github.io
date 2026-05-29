@@ -146,3 +146,11 @@ The main steering mirror maintained approximate line-of-sight alignment using es
 The fast steering mirror corrected residual image-plane tracking error.
 
 > **Focus:** high-bandwidth stabilization, disturbance rejection, fine pointing correction, and maintaining precise target alignment.
+
+<div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:1rem;">
+
+  <a class="md-button md-button--primary" href="../target-pointing-estimate/">
+    Continue to Target Pointing Estimate →
+  </a>
+
+</div>

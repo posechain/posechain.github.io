@@ -27,18 +27,14 @@ Coarse pointing accuracy is important, but over-investing in precision at this s
 
 ## Back to System Summary
 
-<div style="display:flex; justify-content:space-between; align-items:center; margin-top:1rem;">
+<div style="display:flex; justify-content:space-between; gap:1rem; margin-top:1rem;">
 
-  <div>
-    <a href="target-pointing-estimate.md">
-      ← Target Pointing Estimate
-    </a>
-  </div>
+  <a class="md-button" href="../target-pointing-estimate/">
+    ← Target Pointing Estimate
+  </a>
 
-  <div style="text-align:right;">
-    <a href="main-steering-mirror.md">
-      Continue to Main Steering Mirror →
-    </a>
-  </div>
+  <a class="md-button md-button--primary" href="../main-steering-mirror/">
+    Continue to Main Steering Mirror →
+  </a>
 
 </div>

@@ -20,18 +20,14 @@ The resulting estimate is intentionally approximate rather than precise. Its pur
 
 ## Back to System Summary
 
-<div style="display:flex; justify-content:space-between; align-items:center; margin-top:1rem;">
+<div style="display:flex; justify-content:space-between; gap:1rem; margin-top:1rem;">
 
-  <div>
-    <a href="dual-mirror-optical-tracking.md">
-      ← Dual-Mirror Optical Tracking
-    </a>
-  </div>
+  <a class="md-button" href="../dual-mirror-optical-tracking/">
+    ← System Summary
+  </a>
 
-  <div style="text-align:right;">
-    <a href="coarse-pointing-estimate.md">
-      Continue to Coarse Pointing Estimate →
-    </a>
-  </div>
+  <a class="md-button md-button--primary" href="../coarse-pointing-estimate/">
+    Continue to Coarse Pointing Estimate →
+  </a>
 
 </div>

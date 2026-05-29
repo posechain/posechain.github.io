@@ -136,18 +136,14 @@ Robust systems also account for saturation and handoff behavior. When disturbanc
 
 ## Back to System Summary
 
-<div style="display:flex; justify-content:space-between; align-items:center; margin-top:1rem;">
+<div style="display:flex; justify-content:space-between; gap:1rem; margin-top:1rem;">
 
-  <div>
-    <a href="image-plane-tracking-error.md">
-      ← Image Plane Tracking Error
-    </a>
-  </div>
+  <a class="md-button" href="../image-plane-tracking-error/">
+    ← Image Plane Tracking Error
+  </a>
 
-  <div style="text-align:right;">
-    <a href="fine-optical-stabilization.md">
-      Continue to Fine Optical Stabilization →
-    </a>
-  </div>
+  <a class="md-button md-button--primary" href="../fine-optical-stabilization/">
+    Continue to Fine Optical Stabilization →
+  </a>
 
 </div>

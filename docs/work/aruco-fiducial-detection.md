@@ -90,18 +90,14 @@ For a real-time optical tracking system, this cost matters because perception la
 
 ## Back to System Summary
 
-<div style="display:flex; justify-content:space-between; align-items:center; margin-top:1rem;">
+<div style="display:flex; justify-content:space-between; gap:1rem; margin-top:1rem;">
 
-  <div>
-    <a href="camera-observation.md">
-      ← Camera Observation
-    </a>
-  </div>
+  <a class="md-button" href="../camera-observation/">
+    ← Camera Observation
+  </a>
 
-  <div style="text-align:right;">
-    <a href="image-plane-tracking-error.md">
-      Continue to Image Plane Tracking Error →
-    </a>
-  </div>
+  <a class="md-button md-button--primary" href="../image-plane-tracking-error/">
+    Continue to Image Plane Tracking Error →
+  </a>
 
 </div>

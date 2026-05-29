@@ -28,18 +28,14 @@ The main engineering challenge is preserving correct geometry across the spacecr
 
 ## Back to System Summary
 
-<div style="display:flex; justify-content:space-between; align-items:center; margin-top:1rem;">
+<div style="display:flex; justify-content:space-between; gap:1rem; margin-top:1rem;">
 
-  <div>
-    <a href="coarse-pointing-estimate.md">
-      ← Coarse Pointing Estimate
-    </a>
-  </div>
+  <a class="md-button" href="../coarse-pointing-estimate/">
+    ← Coarse Pointing Estimate
+  </a>
 
-  <div style="text-align:right;">
-    <a href="camera-observation.md">
-      Continue to Camera Observation →
-    </a>
-  </div>
+  <a class="md-button md-button--primary" href="../camera-observation/">
+    Continue to Camera Observation →
+  </a>
 
 </div>

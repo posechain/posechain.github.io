@@ -27,18 +27,14 @@ Camera observation sits at an important systems boundary between prediction and 
 
 ## Back to System Summary
 
-<div style="display:flex; justify-content:space-between; align-items:center; margin-top:1rem;">
+<div style="display:flex; justify-content:space-between; gap:1rem; margin-top:1rem;">
 
-  <div>
-    <a href="main-steering-mirror.md">
-      ← Main Steering Mirror
-    </a>
-  </div>
+  <a class="md-button" href="../main-steering-mirror/">
+    ← Main Steering Mirror
+  </a>
 
-  <div style="text-align:right;">
-    <a href="aruco-fiducial-detection.md">
-      Continue to ArUco Fiducial Detection →
-    </a>
-  </div>
+  <a class="md-button md-button--primary" href="../aruco-fiducial-detection/">
+    Continue to ArUco Fiducial Detection →
+  </a>
 
 </div>

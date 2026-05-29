@@ -187,18 +187,14 @@ Tuning therefore becomes an ongoing systems activity rather than a one-time task
 
 ## Back to System Summary
 
-<div style="display:flex; justify-content:space-between; align-items:center; margin-top:1rem;">
+<div style="display:flex; justify-content:space-between; gap:1rem; margin-top:1rem;">
 
-  <div>
-    <a href="fast-steering-mirror.md">
-      ← Fast Steering Mirror
-    </a>
-  </div>
+  <a class="md-button" href="../fast-steering-mirror/">
+    ← Fast Steering Mirror
+  </a>
 
-  <div style="text-align:right;">
-    <a href="dual-mirror-optical-tracking.md">
-      Return to Dual-Mirror Optical Tracking →
-    </a>
-  </div>
+  <a class="md-button md-button--primary" href="../dual-mirror-optical-tracking/">
+    Return to System Summary →
+  </a>
 
 </div>
