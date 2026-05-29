@@ -240,3 +240,154 @@
 .md-footer-copyright {
   display: none !important;
 }
+
+/* ==========================================
+   MOBILE / SMALL SCREEN ADAPTATION
+========================================== */
+
+@media screen and (max-width: 960px) {
+
+  .md-header {
+    height: 2.4rem;
+    min-height: 2.4rem;
+    background: #071018;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.08);
+  }
+
+  .md-header__inner {
+    height: 2.4rem;
+    min-height: 2.4rem;
+  }
+
+  .md-header__button,
+  .md-header__button.md-logo,
+  .md-header__title {
+    display: flex !important;
+  }
+
+  .md-header__title {
+    font-size: 0.85rem;
+  }
+
+  .md-sidebar--primary {
+    position: fixed;
+    width: 18rem;
+    max-width: 85vw;
+    height: 100vh;
+  }
+
+  .md-main__inner {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    max-width: none;
+  }
+
+  .md-content {
+    max-width: none;
+  }
+
+  .md-typeset {
+    font-size: 0.82rem;
+  }
+
+  .md-typeset h1 {
+    font-size: 1.55rem;
+  }
+
+  .md-typeset h2 {
+    font-size: 1.2rem;
+  }
+
+  .md-search {
+    position: static !important;
+    width: auto !important;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .md-sidebar--primary > .md-sidebar__scrollwrap >
+  .md-sidebar__inner >
+  .md-nav--primary >
+  .md-nav__title {
+    min-height: 150px !important;
+  }
+
+  .md-sidebar--primary > .md-sidebar__scrollwrap >
+  .md-sidebar__inner >
+  .md-nav--primary >
+  .md-nav__title::after {
+    width: 180px !important;
+    height: 130px !important;
+    transform: translateY(0) !important;
+  }
+
+  .md-typeset img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .arithmatex {
+    overflow-x: auto;
+  }
+}
+
+/* ==========================================
+   MOBILE CONTENT POSITION FIX
+========================================== */
+
+@media screen and (max-width: 960px) {
+
+  /* absolutely kill desktop offsets */
+  .md-main__inner,
+  .md-content,
+  .md-content__inner,
+  .md-grid {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    left: auto !important;
+    transform: none !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* give readable mobile margin */
+  .md-content__inner {
+    padding: 0 14px !important;
+  }
+
+  /* collapse nav drawer width */
+  .md-sidebar--primary {
+    max-width: 16rem !important;
+  }
+
+  /* remove any phantom desktop logo spacing */
+  .md-nav__title,
+  .md-nav__title::after {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  .md-nav__title::after {
+    display: none !important;
+  }
+
+  /* Let Material mobile drawer work normally */
+  /* Let Material mobile drawer work normally */
+  .md-sidebar--primary {
+    position: fixed !important;
+    transform: translateX(-100%) !important;
+    left: 0 !important;
+    width: 16rem !important;
+    z-index: 1000 !important;
+  }
+
+  /* Open when hamburger is toggled */
+  [data-md-toggle="drawer"]:checked ~ .md-container .md-sidebar--primary {
+    transform: translateX(0) !important;
+  }
+
+  /* Main content should occupy full width */
+  .md-main__inner {
+    margin-left: 0 !important;
+  }
+}
+

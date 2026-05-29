@@ -32,6 +32,9 @@ extra_javascript:
   - javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
+extra:
+  viewport: "width=device-width, initial-scale=0.85, maximum-scale=3, user-scalable=yes"  
+
 markdown_extensions:
   - admonition
   - attr_list
