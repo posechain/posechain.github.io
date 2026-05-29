@@ -178,3 +178,54 @@
   }
 }
 
+/* ==========================================
+   MOBILE CONTENT COMPONENTS
+========================================== */
+
+.case-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.case-nav__next {
+  text-align: right;
+}
+
+@media screen and (max-width: 700px) {
+  .system-flow {
+    gap: 14px;
+  }
+
+  .flow-card {
+    width: 150px;
+    min-height: 170px;
+  }
+
+  .flow-icon-img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .flow-title {
+    font-size: 0.82rem;
+  }
+
+  .case-nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .case-nav__next {
+    text-align: left;
+  }
+
+  .contact-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
