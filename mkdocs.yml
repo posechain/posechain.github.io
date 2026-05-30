@@ -27,6 +27,7 @@ theme:
 extra_css:
   - assets/stylesheets/posechain.css
   - assets/stylesheets/extra.css
+  - assets/stylesheets/engineering-systems.css
 
 extra_javascript:
   - javascripts/mathjax.js
@@ -39,6 +40,10 @@ markdown_extensions:
   - admonition
   - attr_list
   - tables
+  - md_in_html
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
   - toc:
       permalink: true
   - pymdownx.arithmatex:
@@ -48,6 +53,15 @@ markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
+
+plugins:
+  - search
+  - encryptcontent:
+      title_prefix: "Protected: "  
+      password_inventory:
+        engineering-review:
+          - engineering-systems/scalable-it-space-power/*
+      
 
 nav:
   - About Jason Force: index.md
@@ -72,3 +86,23 @@ nav:
           - Summary: work/distributed-robotics.md
       - Space Systems & Integration:
           - Summary: work/space-systems-payload-integration.md
+  - Engineering Systems:
+      - Summary: engineering-systems/index.md
+
+      - Scalable Integration & Test:
+          - Summary: engineering-systems/scalable-it-space-power/index.md
+          - Problem Context: engineering-systems/scalable-it-space-power/problem-context.md
+          - Dual-Track Transformation: engineering-systems/scalable-it-space-power/dual-track-transformation.md
+          - Process Architecture: engineering-systems/scalable-it-space-power/process-architecture.md
+          - Qualification Provenance: engineering-systems/scalable-it-space-power/qualification-provenance.md
+          - Metrics & Visibility: engineering-systems/scalable-it-space-power/metrics-visibility.md
+          - Rollout Strategy: engineering-systems/scalable-it-space-power/rollout-strategy.md
+          - Open Questions: engineering-systems/scalable-it-space-power/open-questions.md
+
+          - Tool Ecosystem:
+              - Jira + Scrumban: engineering-systems/scalable-it-space-power/jira-scrumban.md
+              - BigPicture: engineering-systems/scalable-it-space-power/bigpicture.md
+              - Confluence: engineering-systems/scalable-it-space-power/confluence.md
+              - easeRequirements: engineering-systems/scalable-it-space-power/ease-requirements.md
+              - OpenTAP + Python: engineering-systems/scalable-it-space-power/opentap-python.md
+              - Operations Dashboard: engineering-systems/scalable-it-space-power/operations-dashboard.md          

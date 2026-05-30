@@ -1,0 +1,6 @@
+kdf_iterations: 100000
+obfuscate: {}
+password:
+  camber: 429ad0a3911ff2840beb18f2c5809e786be43676c5b5a9e00a837d1f40eaaf98;3f4a70121298767b2fdc7f3f78b33a05;e662e60988813fdd0977a6c2223d407cda56a8c9f4020e7d172e01720ac09750
+  engineering-systems/scalable-it-space-power/*: 3456f122bcf843e8774d2cf896449c060d37b61241ef85b33aea320157bb5d65;0e233d39ec394dbf22aaf8c8e82de04f;23ed7fdf901eacc7a2a8e1c4a7ff7e83cdac5fba5067ead63ff313d05a0f5088
+userpass: {}
