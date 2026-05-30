@@ -2,70 +2,130 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://posechain.github.io/</loc>
-         <lastmod>2026-05-29</lastmod>
+         <lastmod>2026-05-30</lastmod>
     </url>
     <url>
          <loc>https://posechain.github.io/contact/</loc>
-         <lastmod>2026-05-29</lastmod>
+         <lastmod>2026-05-30</lastmod>
     </url>
     <url>
          <loc>https://posechain.github.io/resume/</loc>
-         <lastmod>2026-05-29</lastmod>
+         <lastmod>2026-05-30</lastmod>
     </url>
     <url>
          <loc>https://posechain.github.io/selected-work/</loc>
-         <lastmod>2026-05-29</lastmod>
+         <lastmod>2026-05-30</lastmod>
+    </url>
+    <url>
+         <loc>https://posechain.github.io/engineering-systems/</loc>
+         <lastmod>2026-05-30</lastmod>
+    </url>
+    <url>
+         <loc>https://posechain.github.io/engineering-systems/scalable-it-space-power/</loc>
+         <lastmod>2026-05-30</lastmod>
+    </url>
+    <url>
+         <loc>https://posechain.github.io/engineering-systems/scalable-it-space-power/bigpicture/</loc>
+         <lastmod>2026-05-30</lastmod>
+    </url>
+    <url>
+         <loc>https://posechain.github.io/engineering-systems/scalable-it-space-power/confluence/</loc>
+         <lastmod>2026-05-30</lastmod>
+    </url>
+    <url>
+         <loc>https://posechain.github.io/engineering-systems/scalable-it-space-power/dual-track-transformation/</loc>
+         <lastmod>2026-05-30</lastmod>
+    </url>
+    <url>
+         <loc>https://posechain.github.io/engineering-systems/scalable-it-space-power/ease-requirements/</loc>
+         <lastmod>2026-05-30</lastmod>
+    </url>
+    <url>
+         <loc>https://posechain.github.io/engineering-systems/scalable-it-space-power/jira-scrumban/</loc>
+         <lastmod>2026-05-30</lastmod>
+    </url>
+    <url>
+         <loc>https://posechain.github.io/engineering-systems/scalable-it-space-power/metrics-visibility/</loc>
+         <lastmod>2026-05-30</lastmod>
+    </url>
+    <url>
+         <loc>https://posechain.github.io/engineering-systems/scalable-it-space-power/open-questions/</loc>
+         <lastmod>2026-05-30</lastmod>
+    </url>
+    <url>
+         <loc>https://posechain.github.io/engineering-systems/scalable-it-space-power/opentap-python/</loc>
+         <lastmod>2026-05-30</lastmod>
+    </url>
+    <url>
+         <loc>https://posechain.github.io/engineering-systems/scalable-it-space-power/operations-dashboard/</loc>
+         <lastmod>2026-05-30</lastmod>
+    </url>
+    <url>
+         <loc>https://posechain.github.io/engineering-systems/scalable-it-space-power/problem-context/</loc>
+         <lastmod>2026-05-30</lastmod>
+    </url>
+    <url>
+         <loc>https://posechain.github.io/engineering-systems/scalable-it-space-power/process-architecture/</loc>
+         <lastmod>2026-05-30</lastmod>
+    </url>
+    <url>
+         <loc>https://posechain.github.io/engineering-systems/scalable-it-space-power/qualification-provenance/</loc>
+         <lastmod>2026-05-30</lastmod>
+    </url>
+    <url>
+         <loc>https://posechain.github.io/engineering-systems/scalable-it-space-power/rollout-strategy/</loc>
+         <lastmod>2026-05-30</lastmod>
     </url>
     <url>
          <loc>https://posechain.github.io/resume/perception/</loc>
-         <lastmod>2026-05-29</lastmod>
+         <lastmod>2026-05-30</lastmod>
     </url>
     <url>
          <loc>https://posechain.github.io/resume/space/</loc>
-         <lastmod>2026-05-29</lastmod>
+         <lastmod>2026-05-30</lastmod>
     </url>
     <url>
          <loc>https://posechain.github.io/work/aruco-fiducial-detection/</loc>
-         <lastmod>2026-05-29</lastmod>
+         <lastmod>2026-05-30</lastmod>
     </url>
     <url>
          <loc>https://posechain.github.io/work/camera-observation/</loc>
-         <lastmod>2026-05-29</lastmod>
+         <lastmod>2026-05-30</lastmod>
     </url>
     <url>
          <loc>https://posechain.github.io/work/coarse-pointing-estimate/</loc>
-         <lastmod>2026-05-29</lastmod>
+         <lastmod>2026-05-30</lastmod>
     </url>
     <url>
          <loc>https://posechain.github.io/work/distributed-robotics/</loc>
-         <lastmod>2026-05-29</lastmod>
+         <lastmod>2026-05-30</lastmod>
     </url>
     <url>
          <loc>https://posechain.github.io/work/dual-mirror-optical-tracking/</loc>
-         <lastmod>2026-05-29</lastmod>
+         <lastmod>2026-05-30</lastmod>
     </url>
     <url>
          <loc>https://posechain.github.io/work/fast-steering-mirror/</loc>
-         <lastmod>2026-05-29</lastmod>
+         <lastmod>2026-05-30</lastmod>
     </url>
     <url>
          <loc>https://posechain.github.io/work/fine-optical-stabilization/</loc>
-         <lastmod>2026-05-29</lastmod>
+         <lastmod>2026-05-30</lastmod>
     </url>
     <url>
          <loc>https://posechain.github.io/work/image-plane-tracking-error/</loc>
-         <lastmod>2026-05-29</lastmod>
+         <lastmod>2026-05-30</lastmod>
     </url>
     <url>
          <loc>https://posechain.github.io/work/main-steering-mirror/</loc>
-         <lastmod>2026-05-29</lastmod>
+         <lastmod>2026-05-30</lastmod>
     </url>
     <url>
          <loc>https://posechain.github.io/work/space-systems-payload-integration/</loc>
-         <lastmod>2026-05-29</lastmod>
+         <lastmod>2026-05-30</lastmod>
     </url>
     <url>
          <loc>https://posechain.github.io/work/target-pointing-estimate/</loc>
-         <lastmod>2026-05-29</lastmod>
+         <lastmod>2026-05-30</lastmod>
     </url>
 </urlset>

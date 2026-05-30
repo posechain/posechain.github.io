@@ -1,0 +1,73 @@
+/* =====================================================
+   Engineering Systems Case Study Tables
+   ===================================================== */
+
+.md-typeset .md-typeset__table table {
+    width: 100%;
+    font-size: 1rem;
+    line-height: 1.55;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Header row */
+.md-typeset .md-typeset__table table th {
+    background-color: rgba(255,255,255,0.11);
+    color: rgba(255,255,255,0.96);
+
+    font-size: 0.98rem;
+    font-weight: 700;
+    text-align: left;
+
+    padding: 0.75rem 1.15rem;
+
+    border-bottom: 1px solid rgba(255,255,255,0.14);
+}
+
+/* Body cells */
+.md-typeset .md-typeset__table table td {
+    font-size: 1rem;
+    padding: 0.75rem 1.15rem;
+    vertical-align: top;
+
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* First column emphasis */
+.md-typeset .md-typeset__table table td:first-child {
+    width: 32%;
+    min-width: 220px;
+    max-width: 420px;
+
+    font-weight: 700;
+    font-size: 1.01rem;
+    color: rgba(255,255,255,0.97);
+
+    /* allow intelligent wrapping */
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
+
+    border-right: 1px solid rgba(255,255,255,0.10);
+}
+
+/* Header divider */
+.md-typeset .md-typeset__table table th:first-child {
+    border-right: 1px solid rgba(255,255,255,0.10);
+}
+
+/* Subtle alternating rows */
+.md-typeset .md-typeset__table table tbody tr:nth-child(even) {
+    background-color: rgba(255,255,255,0.015);
+}
+
+/* Hover state */
+.md-typeset .md-typeset__table table tbody tr:hover {
+    background-color: rgba(255,255,255,0.035);
+}
+
+/* Better spacing around tables */
+.md-typeset .md-typeset__table {
+    margin-top: 0.75rem;
+    margin-bottom: 1.25rem;
+}
